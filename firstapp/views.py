@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from .models import Product
-
+from .forms import ProductForm
 
 #--------------------function to add products---------------------------#
 #-----------------------------------------------------------------------#
@@ -47,9 +47,17 @@ def validate(request, prod_id):
         return render(request)
     
 #-----------------------------------------------------------------------#
-
 def test(request):
-    # Retrieve all values from the database
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            price = form.cleaned_data['price']
+            quantity = form.cleaned_data['quantity']
+            product = Product(name=name, price=price, quantity=quantity)
+            product.save()
+            return redirect('add_product')
+    else:
+        form = ProductForm()
     products = Product.objects.all()
-
-    return render(request, "index.html", {'products': products})
+    return render(request, 'index.html', {'form': form, 'products': products})
