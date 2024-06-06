@@ -4,5 +4,5 @@ from . import views
 #urlconfig
 
 urlpatterns = [
-    path('hello/', views.test)
+    path('hello/', views.test, name= 'add_product')
 ]
