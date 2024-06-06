@@ -37,14 +37,20 @@ def delete(request, prod_id):
 
 #--------------------function to validate products----------------------#
 #-----------------------------------------------------------------------#
-def validate(request, prod_id):
+def modify(request, id=1):
     if request.method == 'POST':
-        name = request.POST.get('name', None)                                  
-        price = request.POST.get('price', None)                         
-        quantity = request.POST.get('quantity', None)                   
-        return render(request)                                          
-    if request.method == 'GET':
-        return render(request)
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            price = form.cleaned_data['price']
+            quantity = form.cleaned_data['quantity']
+            product = Product(name=name, price=price, quantity=quantity)
+            product.save()
+            return redirect('add_product')
+    else:
+        form = ProductForm()
+    products = Product.objects.all()
+    return render(request, 'modify.html', {'form': form, 'products': products})
     
 #-----------------------------------------------------------------------#
 def test(request):

@@ -72,18 +72,14 @@
         color: #fff;
         border: none;
         border-radius: 8px;
-        padding: 10px 15px;
-        margin: 15px;
-        float: left;
-        font-size: 18px;
-        width: 120px;
+        padding: 5px;
+        margin: 10px;
+        width: 200px;
         height: 45px;
         font-weight: 600;
         cursor: pointer;
         transition: background-color 0.3s ease;
       }
-
-      
 
       @media (max-width: 767px) {
         .container {
@@ -155,7 +151,7 @@
         <form method="post" action="{% url 'add_product' %}">
             {% csrf_token %}
             <div class="form-style-2">
-                <div class="form-style-2-heading">Product informations</div>
+                <div class="form-style-2-heading">Product Informations</div>
                 <form action="" method="post">
                     <label for="name"><span>Name <span class="required">*</span></span><input type="text" id="name" class="input-field" name="name" required></label>
                     <label for="name"><span>Price <span class="required">*</span></span><input type="text" id="price" class="input-field" name="price" step="1" required></label>
@@ -163,18 +159,19 @@
             </div>
           <button class="fas fa-save fa-alt" type="submit" style="background-color: #5DADE2;"> Submit</button>
         </form>
-        <h2>Product List</h2>
+        <h2>Product List...</h2>
     <ul>
         {% for product in products %}
             <li>
-                <h3>Name: {{ product.name }}</h3>
+                <h3>{{ product.name }}</h3>
                 <p>Price: {{ product.price }}</p>
                 <p>Quantity: {{ product.quantity }}</p>
             </li>
         {% empty %}
             <li>No products found.</li>
         {% endfor %}
-    </ul>
+        <a href="{% url 'modify_product' %}"><button class="fas fa-solid fa-pen" class="edit" type="submit" style="background-color: #7F8C8D; font-size: 15px;">...Update Products</button>
+      </ul>
       </div>
   </body>
 </html>
