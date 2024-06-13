@@ -67,3 +67,5 @@ def test(request):
         form = ProductForm()
     products = Product.objects.all()
     return render(request, 'index.html', {'form': form, 'products': products})
+#reuquest,id
+#form =Production(request.post,instance=)

@@ -21,6 +21,7 @@
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
+ 
       .head {
         display: flex;
         justify-content: center;
@@ -38,17 +39,6 @@
       form {
         display: flex;
         flex-direction: column;
-      }
-
-      .measurement-group {
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin-bottom: 24px;
-      }
-
-      .measurement-group > div {
-        flex-basis: 48%;
-        margin: 4px;
       }
 
       textarea {
@@ -74,7 +64,6 @@
         border-radius: 8px;
         padding: 10px 15px;
         margin: 15px;
-        float: left;
         font-size: 18px;
         width: 120px;
         height: 45px;
@@ -82,16 +71,9 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
       }
-
-      
-
       @media (max-width: 767px) {
         .container {
           padding: 24px;
-        }
-
-        .measurement-group > div {
-          flex-basis: 100%;
         }
       }
 
@@ -147,6 +129,56 @@
         .form-style-2 .input-field:focus {
             border: 1px solid #0C0;
         }
+        .gb{
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          padding: 10px 15px;
+          margin-right: 10%;
+          font-size: 8px;
+          width: 120px;
+          height: 40px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          position:absolute;
+          left:400px;
+          
+
+        }
+        .gb{
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          padding: 10px 15px;
+          margin-right: 10%;
+          font-size: 8px;
+          width: 120px;
+          height: 40px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          position:absolute;
+          left:29.5%;
+          backg%round-color: red;
+          
+
+        }
+        .mp{
+          color: #fff;
+          border: 30;
+          border-radius: 8px;
+          font-size: 10px;
+          width: 90px;
+          height: 30px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          position:relative;
+          left:-20px
+        }
+       
+        
     </style>
   </head>
   <body>     
@@ -169,11 +201,13 @@
                 <h3>Name: {{ product.name }}</h3>
                 <p>Price: {{ product.price }}</p>
                 <p>Quantity: {{ product.quantity }}</p>
-        {% empty %}
+                <a href="{% url 'modify_product' %}"><button class="mp" type="submit" style="background-color: #7F8C8D; font-size: 15px;">Update</button> <a href="{% url 'modify_product' %}"><button class="mp" type="submit" style="background-color: #7F8C8D; font-size: 15px;">Delete</button>
+            </li>
+                  {% empty %}
             <li>No products found.</li>
         {% endfor %}
+        <a href="{% url 'add_product' %}"><button class="gb" type="submit" style="background-color: #5DADE2; font-size: 15px;">...Go Back</button>
     </ul>
-    <a href="{% url 'add_product' %}"><button class="fas fa-solid fa-pen" class="edit" type="submit" style="background-color: #7F8C8D; font-size: 15px;">...Go Back</button>
       </div>
   </body>
 </html>
