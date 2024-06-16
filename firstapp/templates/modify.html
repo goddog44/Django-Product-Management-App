@@ -1,9 +1,12 @@
+{% comment %} {% load crispy_forms %} {% endcomment %}
 <!DOCTYPE html>
+
 <html>
   <head>
     <title>Submit Measurements</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <meta charset="UTF-8">
     <style>
       body {
@@ -175,39 +178,57 @@
           cursor: pointer;
           transition: background-color 0.3s ease;
           position:relative;
-          left:-20px
+          left:-20px;
         }
-       
-        
-    </style>
-  </head>
+        button {
+          background-color: ;
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          padding: 5px;
+          margin: 10px;
+          width: 100px;
+          height: 35px;
+          font-weight: 600;
+          cursor: pointer;
+          left: -10px;
+          transition: background-color 0.3s ease;
+        }
+  
+</style>
+<html>
   <body>     
     <div class="container" style="margin-top: 17%;">
-        <div class= "head"><h2 style="color: black; ">Modify A Product</h2></div>
-        <form method="post" action="{% url 'add_product' %}">
-            {% csrf_token %}
-            <div class="form-style-2">
-                <div class="form-style-2-heading">Product New Informations</div>
-                <form action="" method="post">
-                    <label for="name"><span>Name <span class="required">*</span></span><input type="text" id="name" class="input-field" name="name" required></label>
-                    <label for="name"><span>Price <span class="required">*</span></span><input type="text" id="price" class="input-field" name="price" step="1" required></label>
-                    <label for="name"><span>Quantity <span class="required">*</span></span><input type="text" id="quantity" class="input-field" name="quantity" step="1" required></label>
-                  </div>
+      <div class= "head"><h2 style="color: black; ">Modify A Product</h2></div>
+        <form method="post">
+         {% csrf_token %}
+          {% comment %} <div class="form-style-2">
+            <div class="form-style-2-heading">Product New Information</div>
+            <label for="name"><span>Name <span class="required">*</span></span><input type="text" class="input-field" name="name" id="name" value="{{ product.name }}"></label>
+            <label for="price"><span>Price <span class="required">*</span></span><input type="text" class="input-field" name="price" value="{{ product.price }}"></label>
+            <label for="quantity"><span>Quantity <span class="required">*</span></span><input type="text" class="input-field" name="quantity" value="{{ product.quantity }}"></label>
+          </div> {% endcomment %}
+          {{form.as_p}}
+
+
+          <button class="fas fa-save fa-alt" type="submit" style="background-color: #5DADE2;">Update</button>
         </form>
+
         <h2>Product List</h2>
-    <ul>
-        {% for product in products %}
-            <li>
-                <h3>Name: {{ product.name }}</h3>
-                <p>Price: {{ product.price }}</p>
-                <p>Quantity: {{ product.quantity }}</p>
-                <a href="{% url 'modify_product' %}"><button class="mp" type="submit" style="background-color: #7F8C8D; font-size: 15px;">Update</button> <a href="{% url 'modify_product' %}"><button class="mp" type="submit" style="background-color: #7F8C8D; font-size: 15px;">Delete</button>
-            </li>
-                  {% empty %}
-            <li>No products found.</li>
-        {% endfor %}
-        <a href="{% url 'add_product' %}"><button class="gb" type="submit" style="background-color: #5DADE2; font-size: 15px;">...Go Back</button>
-    </ul>
-      </div>
+        <ul>
+            {% for product in products %}
+          <li >
+            <p font-size= 12 font-style= "bold">Name: {{ product.name }}</p>
+            <p>Price: {{ product.price }} FCFA</p>
+            <p>Quantity: {{ product.quantity }} items</p>
+            <a href="{% url 'update_product' product.id %}"><button class="mp" type="hidden" style="background-color: #7F8C8D; font-size: 15px;">Edit</button></a>
+            <a href="{% url 'delete_product' product.id %}"><button class="mp" type="hidden" style="background-color: #7F8C8D; font-size: 15px;">Delete</button></a>
+          </li>
+            {% empty %}
+                <li>No products found.</li>
+            {% endfor %}
+            <a href="{% url 'add_product' %}"><button class="gb" type="" style="background-color: #5DADE2; font-size: 15px;">...Go Back</button></a>
+        </ul>
+    </div>
   </body>
 </html>
